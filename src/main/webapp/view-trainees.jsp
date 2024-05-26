@@ -8,6 +8,7 @@
     <title>Title</title>
 </head>
 <body>
+<button><a href="index.jsp">Main Menu</a></button>
    <div>
        <h2>Trainees</h2>
        <table>

@@ -24,12 +24,6 @@ public class TraineeController {
         return "index.jsp";
     }
 
-//    @GetMapping("/add-trainee")
-//    public String submitForm(@ModelAttribute Trainee trainee) {
-//        System.out.println(trainee);
-//        return "index.jsp";
-//    }
-
     @PostMapping("/add-trainee")
     public String addTrainee(@ModelAttribute("trainee") Trainee trainee){
             TraineeDto traineeDto= traineeService.saveTrainee(new TraineeDto(0,trainee.getName(),trainee.getEmail(),trainee.getLocation()));
@@ -38,15 +32,7 @@ public class TraineeController {
         return "view-trainee.jsp";
     }
 
-//    @GetMapping("/view-all")
-//    public String viewTrainees(@ModelAttribute("trainees") ArrayList<TraineeDto> trainees){
-//        System.out.println("Getting all the trainees from the DB!!");
-//        trainees=new ArrayList<TraineeDto>(traineeService.getAllTrainees());
-//        for(TraineeDto tr:trainees){
-//            System.out.println(tr);
-//        }
-//        return "view-trainees.jsp";
-//    }
+
     @GetMapping("/view-all")
     public String viewTrainees(Model model){
         System.out.println("Getting all the trainees from the DB!!");
@@ -55,13 +41,15 @@ public class TraineeController {
             System.out.println(tr);
         }
         model.addAttribute("trainees",trainees);
-        return "view-trainees.jsp";
+        return "index.jsp";
     }
 
-    @GetMapping("/search{id}")
-    public String remove(@ModelAttribute("trainees") ArrayList<TraineeDto> trainees){
-//        traineeService.deleteTrainee(id);
-        return "view-trainees.jsp";
+    @PostMapping("/search-trainee")
+    public String remove(TraineeDto trainee,Model model){
+        List<TraineeDto> trainees = List.of(traineeService.getTrainee(trainee.id()));
+        model.addAttribute("trainees",trainees);
+        System.out.println("Trainee Added Successfully with ID: "+trainee.id());
+        return "index.jsp";
     }
 
     @GetMapping("/delete-trainee")
@@ -70,7 +58,5 @@ public class TraineeController {
         System.out.println("deleting "+id);
         return "view-all";
     }
-
-
 
 }

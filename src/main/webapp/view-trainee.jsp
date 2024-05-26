@@ -7,6 +7,7 @@
     <title>Title</title>
 </head>
 <body>
+<button><a href="index.jsp">Main Menu</a></button>
    <div>
        <h2>Trainee Saved Successfully</h2>
        <p>ID: ${trainee.getId()}</p>
